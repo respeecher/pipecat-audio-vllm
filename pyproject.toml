@@ -1,0 +1,42 @@
+[project]
+name = "pipecat-audio-vllm"
+version = "0.1.0"
+description = "Self-hosted audio-native LLMs plugin for Pipecat"
+license = "BSD-2-Clause"
+license-files = ["LICENSE"]
+readme = "README.md"
+requires-python = ">=3.10"
+keywords = ["pipecat-ai", "pipecat", "vllm"]
+authors = [
+    {name = "Respeecher", email = "nv@respeecher.com"}
+]
+maintainers = [
+    {name = "Respeecher", email = "nv@respeecher.com"}
+]
+classifiers = [
+    "Intended Audience :: Developers",
+    "Operating System :: OS Independent",
+    "Programming Language :: Python :: 3.10",
+    "Programming Language :: Python :: 3.11",
+    "Programming Language :: Python :: 3.12",
+    "Programming Language :: Python :: 3.13",
+    "Topic :: Software Development :: Libraries :: Python Modules",
+]
+
+[project.urls]
+Source = "https://github.com/respeecher/pipecat-audio-vllm"
+
+[tool.ruff.lint]
+ignore = ["E402"]
+
+[tool.setuptools.packages.find]
+where = ["src"]
+
+[build-system]
+requires = ["setuptools>=64", "setuptools_scm>=8"]
+build-backend = "setuptools.build_meta"
+
+[dependency-groups]
+dev = [
+    "vllm>=0.13.0",
+]
