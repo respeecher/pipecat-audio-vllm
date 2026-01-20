@@ -33,7 +33,7 @@ dev = [
     "pipecat-respeecher>=0.1.1",
 ]
 vllm = [
-    "vllm>=0.13.0",
+    "vllm[audio]>=0.13.0",
 ]
 
 [project.urls]
