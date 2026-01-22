@@ -16,13 +16,11 @@ class AudioContextAggregator(FrameProcessor):
     def __init__(
         self,
         context: LLMContext,
-        context_aggregator: LLMContextAggregator,
         *,
         start_secs: float = 0.2,
     ):
         super().__init__()
         self._context = context
-        self._context_aggregator = context_aggregator
         self._audio_frames = deque()
         self._audio_duration = 0
         self._start_secs = start_secs
@@ -38,7 +36,7 @@ class AudioContextAggregator(FrameProcessor):
             await self._context.add_audio_frames_message(
                 audio_frames=self._audio_frames, text=""
             )
-            await self._context_aggregator.push_frame(
+            await self.push_frame(
                 LLMContextFrame(context=self._context)
             )
         elif isinstance(frame, InputAudioRawFrame):
