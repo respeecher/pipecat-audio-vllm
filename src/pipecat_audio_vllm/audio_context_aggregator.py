@@ -1,9 +1,6 @@
 from collections import deque
 from pipecat.processors.frame_processor import FrameProcessor
 from pipecat.processors.aggregators.llm_context import LLMContext
-from pipecat.processors.aggregators.llm_response_universal import (
-    LLMContextAggregator,
-)
 from pipecat.frames.frames import (
     InputAudioRawFrame,
     LLMContextFrame,
@@ -36,9 +33,7 @@ class AudioContextAggregator(FrameProcessor):
             await self._context.add_audio_frames_message(
                 audio_frames=self._audio_frames, text=""
             )
-            await self.push_frame(
-                LLMContextFrame(context=self._context)
-            )
+            await self.push_frame(LLMContextFrame(context=self._context))
         elif isinstance(frame, InputAudioRawFrame):
             self._audio_frames.append(frame)
             self._audio_duration += self._get_duration(frame)
