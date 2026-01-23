@@ -52,13 +52,13 @@ from pipecat.processors.aggregators.llm_response_universal import (
 from pipecat.processors.frameworks.rtvi import RTVIConfig, RTVIObserver, RTVIProcessor
 from pipecat.runner.types import RunnerArguments
 from pipecat.runner.utils import create_transport
+from pipecat.services.openai import OpenAILLMService
 from pipecat.transports.base_transport import BaseTransport, TransportParams
 from pipecat.transports.daily.transport import DailyParams
 from pipecat.turns.user_turn_strategies import UserTurnStrategies
 from pipecat_respeecher import RespeecherTTSService
 from pipecat_whisker import WhiskerObserver
 from pipecat_audio_llm import (
-    AudioLLMService,
     AudioContextAggregator,
     AudioUserTurnStopStrategy,
 )
@@ -71,7 +71,11 @@ load_dotenv(override=True)
 async def run_bot(transport: BaseTransport, runner_args: RunnerArguments):
     logger.info("Starting bot")
 
-    llm = AudioLLMService()
+    llm = OpenAILLMService(
+        base_url=os.getenv("LLM_BASE_URL", "http://localhost:8000/v1"),
+        api_key=os.getenv("LLM_API_KEY", ""),
+        model="",
+    )
 
     tts = RespeecherTTSService(
         api_key=os.getenv("RESPEECHER_API_KEY"),
