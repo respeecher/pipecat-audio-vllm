@@ -57,7 +57,7 @@ from pipecat.transports.daily.transport import DailyParams
 from pipecat.turns.user_turn_strategies import UserTurnStrategies
 from pipecat_respeecher import RespeecherTTSService
 from pipecat_whisker import WhiskerObserver
-from pipecat_audio_vllm import (
+from pipecat_audio_llm import (
     AudioLLMService,
     AudioContextAggregator,
     AudioUserTurnStopStrategy,

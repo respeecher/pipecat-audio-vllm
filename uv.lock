@@ -3352,7 +3352,7 @@ wheels = [
 ]
 
 [[package]]
-name = "pipecat-audio-vllm"
+name = "pipecat-audio-llm"
 version = "0.1.0"
 source = { editable = "." }
 dependencies = [

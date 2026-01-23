@@ -1,12 +1,12 @@
 [project]
-name = "pipecat-audio-vllm"
+name = "pipecat-audio-llm"
 version = "0.1.0"
-description = "Self-hosted audio-native LLMs plugin for Pipecat"
+description = "Audio-native LLM utilities for Pipecat"
 license = "BSD-2-Clause"
 license-files = ["LICENSE"]
 readme = "README.md"
 requires-python = ">=3.10"
-keywords = ["pipecat-ai", "pipecat", "vllm"]
+keywords = ["pipecat-ai", "pipecat"]
 authors = [
     {name = "Respeecher", email = "nv@respeecher.com"}
 ]
@@ -37,7 +37,7 @@ vllm = [
 ]
 
 [project.urls]
-Source = "https://github.com/respeecher/pipecat-audio-vllm"
+Source = "https://github.com/respeecher/pipecat-audio-llm"
 
 [tool.ruff.lint]
 ignore = ["E402"]
