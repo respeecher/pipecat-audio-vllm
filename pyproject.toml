@@ -32,9 +32,6 @@ dev = [
     "pipecat-ai[daily,local-smart-turn-v3,runner,silero,webrtc]>=0.0.99",
     "pipecat-respeecher>=0.1.2",
 ]
-vllm = [
-    "vllm[audio]>=0.13.0",
-]
 
 [project.urls]
 Source = "https://github.com/respeecher/pipecat-audio-llm"
