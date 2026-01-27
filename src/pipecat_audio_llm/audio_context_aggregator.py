@@ -30,9 +30,14 @@ class AudioContextAggregator(FrameProcessor):
             self._is_user_speaking = True
         elif isinstance(frame, UserStoppedSpeakingFrame):
             self._is_user_speaking = False
-            await self._context.add_audio_frames_message(
+
+            message = await self._context.create_audio_message(
                 audio_frames=self._audio_frames, text=""
             )
+            assert message["content"][0]["type"] == "text"
+            del message["content"][0]
+            self._context.add_message(message)
+
             await self.push_frame(LLMContextFrame(context=self._context))
         elif isinstance(frame, InputAudioRawFrame):
             self._audio_frames.append(frame)
