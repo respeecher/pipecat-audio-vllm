@@ -11,10 +11,7 @@ from pipecat.frames.frames import (
 
 class AudioContextAggregator(FrameProcessor):
     def __init__(
-        self,
-        context: LLMContext,
-        *,
-        start_secs: float = 0.2,
+        self, context: LLMContext, *, start_secs: float = 0.2, text: str | None = None
     ):
         super().__init__()
         self._context = context
@@ -22,6 +19,7 @@ class AudioContextAggregator(FrameProcessor):
         self._audio_duration = 0
         self._start_secs = start_secs
         self._is_user_speaking = False
+        self._text = text
 
     async def process_frame(self, frame, direction):
         await super().process_frame(frame, direction)
@@ -32,10 +30,13 @@ class AudioContextAggregator(FrameProcessor):
             self._is_user_speaking = False
 
             message = await self._context.create_audio_message(
-                audio_frames=self._audio_frames, text=""
+                audio_frames=self._audio_frames, text=self._text or ""
             )
-            assert message["content"][0]["type"] == "text"
-            del message["content"][0]
+
+            if self._text is None:
+                assert message["content"][0]["type"] == "text"
+                del message["content"][0]
+
             self._context.add_message(message)
 
             await self.push_frame(LLMContextFrame(context=self._context))
