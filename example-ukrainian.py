@@ -99,7 +99,10 @@ async def run_bot(transport: BaseTransport, runner_args: RunnerArguments):
             ),
         ),
     )
-    audio_context_aggregator = AudioContextAggregator(context)
+    audio_context_aggregator = AudioContextAggregator(
+        context,
+        text=os.getenv("AUDIO_PLACEHOLDER") or None,
+    )
 
     # [Optional] Without RTVI, the chat interface in the WebRTC demo page won't work.
     rtvi = RTVIProcessor(config=RTVIConfig(config=[]))
